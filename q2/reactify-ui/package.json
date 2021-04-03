@@ -3,10 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "1.1.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "font-awesome": "^4.7.0",
+    "react": "^16.10.2",
+    "react-datepicker": "^2.14.1",
+    "react-dom": "^16.10.2",
+    "react-modal": "^3.11.2",
+    "react-model": "^3.0.3",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "redux": "^4.0.4",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
     "renamer": "^0.7.3",
     "copyfiles": "^2.0.0"
   },
@@ -29,5 +40,17 @@
     "copy-build-css": "copyfiles -f \"build/static/css/*.css\" \"../staticfiles/css/\"",
     "collectstatic": "python ../manage.py collectstatic --no-input",
     "runserver": "python ../manage.py runserver localhost:8000"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
