@@ -2,10 +2,14 @@ import { action_types, urls } from "./constants";
 import { Api } from './api';
 
 export const callApi = (action, body, rType = "POST", hasFile = false, fileList = [], hType = 1) => async dispatch => {
-  let url, isFile = false, isExtUrl = false, clearData = false, loading = true;
+  let url, clearData = false, loading = true;
   switch (action) {
     case action_types.LOGIN:
       url = urls.LOGIN_URL;
+      clearData = true;
+      break;
+    case action_types.REGISTER:
+      url = urls.REGISTER_URL;
       clearData = true;
       break;
     default:
@@ -22,7 +26,7 @@ export const callApi = (action, body, rType = "POST", hasFile = false, fileList 
       });
     }
     let response = null;
-    response = await Api(url, body, rType, isFile, isExtUrl, hType);
+    response = await Api(url, body, rType);
     console.log("response", response)
     if (response.status === 403) {
       dispatch({

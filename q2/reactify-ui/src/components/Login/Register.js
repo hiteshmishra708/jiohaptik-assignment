@@ -8,6 +8,8 @@ import * as actions from '../../actions/action';
 
 class Login extends Component {
     state = {
+        first_name: "",
+        last_name: "",
         email: "",
         password: "",
         showError: false,
@@ -38,9 +40,11 @@ class Login extends Component {
         e.preventDefault();
         this.setState({ showError: true })
         if (this.isValid()) {
-            this.props.callApi(action_types.LOGIN, {
+            this.props.callApi(action_types.REGISTER, {
                 email: this.state.email,
-                password: this.state.password
+                password: this.state.password,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name
             });
             this.setState({ showError: false, modalMsg: "" });
         }
@@ -80,8 +84,14 @@ class Login extends Component {
             <Div cName="login">
                 {this.state.showModal && !this.props.loading && (<Modal width="400px" height="200px" closeModal={this.closeModal} title={this.state.modalMsg} isSuccess={!this.state.showError} />)}
                 <Div cName="login-wrapper">
-                    <Div cName="login-wrapper-heading d-common-label">Login</Div>
+                    <Div cName="login-wrapper-heading d-common-label">Register</Div>
                     <form onSubmit={(e) => this.onSubmit(e)}>
+                        <Div cName="row form-group">
+                            <Input type="text" label="First Name" id="first_name" value={this.state.first_name} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />
+                        </Div>
+                        <Div cName="row form-group">
+                            <Input type="text" label="Last Name" id="last_name" value={this.state.last_name} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />
+                        </Div>
                         <Div cName="row form-group">
                             <Input iType="email" label="Enter Email" id="email" value={this.state.email} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />
                         </Div>
@@ -89,7 +99,7 @@ class Login extends Component {
                             <Input type="password" label="Enter Password" id="password" value={this.state.password} required={true} onChange={this.onChange} showError={this.state.showError} />
                         </Div>
                         <Div cName="row submit-row">
-                            <Button cName="form-control submit-button-md" title="Login" />
+                            <Button cName="form-control submit-button-md" title="Register" />
                         </Div>
                     </form>
                 </Div>

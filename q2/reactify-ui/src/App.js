@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import Layout from './components/Layouts/Layout';
 import Login from './components/Login/Login';
+import Register from './components/Login/Register';
 import { Div, Spinner } from './components/Common/Common';
 import { connect } from "react-redux";
 import Header from './components/Header/Header';
@@ -34,9 +35,10 @@ class App extends Component {
             ) : (
                 <Switch>
                   <Layout>
-                    <Route path="/" component={Login} />
+                    {/* <Route path="/" component={Login} /> */}
                     <Route path="/login" component={Login} />
-                    <Redirect from='*' to='/' />
+                    <Route path="/register" component={Register} />
+                    {/* <Redirect from='*' to='/login' /> */}
                   </Layout>
                 </Switch>
               )}

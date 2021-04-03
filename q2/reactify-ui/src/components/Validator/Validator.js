@@ -83,15 +83,5 @@ export const getBase64 = (file) => {
 export const MENU = [
     { url: '/shop_list', option: 'Shop List', when: ['OrgAdmin'] },
     // { url: '/feedback_form', option: 'Feedback Form', when: ['OrgAdmin'] },
-    { url: '/counter_list', option: 'Counter List', when: ['ShopAdmin'] },
-    { url: '/cashier_list', option: 'Cashier List', when: ['ShopAdmin'] },
-    { url: '/block_users', option: 'Blocked Users', when: ['OrgAdmin'] },
-    // { url: '/statistics', option: 'Statistics', when: ['OrgAdmin', 'ShopAdmin'] },
-    { url: '/create_edit', option: 'Create/Edit Details', when: ['OrgAdmin'] },
-    { url: '/create_edit', option: 'Edit Details', when: ['ShopAdmin'] },
-    { url: '/queue', option: 'Queue', when: ['Cashier'] },
-    { url: '/booking', option: 'Booking', when: ['Cashier'] },
-    { url: '/not_appeared', option: 'Not Appeared', when: ['Cashier'] },
-    { url: '/reset_counter', option: 'Reset Counter', when: ['ShopAdmin'] },
     { url: '/login', option: 'Logout', when: ['OrgAdmin', 'ShopAdmin', 'Cashier'] },
 ];

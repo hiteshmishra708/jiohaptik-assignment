@@ -1,17 +1,17 @@
-from itertools import chain, combinations
-
-def powerset(iterable):
-    "powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
-    s = list(iterable)  # allows duplicate elements
-    return chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
+def check_formation(input_string, keywords):
+    for i in range(len(input_string)):
+        if input_string[:i+1] in keywords:
+            if i == len(input_string)-1:
+                return True
+            else:
+                if check_formation(input_string[ i+1: ], keywords):
+                    return True
+    return False
 
 def can_create(list_of_strings, input_string):
-    can_create = False
-    for i, combo in enumerate(powerset(list_of_strings), 1):
-        val = ''.join(combo)
-        if val and val == input_string:
-            can_create = True
-    return can_create
+    keywords = { i: 1 for i in list_of_strings }
+    print(keywords)
+    return check_formation(input_string, keywords)
 
 list_of_strings = ['back', 'end', 'front', 'tree']
 input_string = 'backend'

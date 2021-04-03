@@ -39,6 +39,7 @@ class Header extends Component {
     }
 
     onClick = (e) => {
+        debugger
         if (e.target.id === '/login') this.logout();
         else {
             this.setState({ active: e.target.id })
@@ -46,22 +47,23 @@ class Header extends Component {
     }
 
     render() {
+        const isLogin = window.location.href.indexOf('login') != -1;
         return (
             <Div cName="login-header">
                 <Div cName="row">
-                    <Div cName="top-navbar">
-                    <Div cName="mobile-nav vertically-center">
-                        <Div cName="mobile-links">
-                            <span className="fa fa-bars" />
-                        </Div>
-                    </Div>
-                    <Div cName="links menu-links">
-                            {this.state.menu.map((val, idx) => {
-                                return (
-                                    <Link key={idx} cName={this.state.active === val.url ? "active" : ""} id={val.url} to={val.url} title={val.option} onClick={this.onClick} />
-                                )
-                            })}
-                        </Div>
+                    <Div cName="links menu-links app-title">
+                        {this.state.menu.length === 0 && (
+                            isLogin? (
+                                <Link cName="active" to="/register" title="Register" />
+                            ): (
+                                <Link cName="active" to="/login" title="Login" />
+                            )
+                        )}
+                        {this.state.menu.map((val, idx) => {
+                            return (
+                                <Link key={idx} cName={this.state.active === val.url ? "active" : ""} id={val.url} to={val.url} title={val.option} onClick={this.onClick} />
+                            )
+                        })}
                     </Div>
                 </Div>
             </Div>
