@@ -13,5 +13,15 @@ def can_create(list_of_strings, input_string):
             can_create = True
     return can_create
 
-result = can_create(['back', 'end', 'front', 'tree'], 'backend')
-print(result)
+list_of_strings = ['back', 'end', 'front', 'tree']
+input_string = 'backend'
+result = can_create(list_of_strings, input_string)
+print('List: %s \nInput String: %s \nResult: %s\n' %(list_of_strings, input_string, result))
+
+input_string = 'frontyard'
+result = can_create(list_of_strings, input_string)
+print('List: %s \nInput String: %s \nResult: %s\n' %(list_of_strings, input_string, result))
+
+input_string = 'frontend'
+result = can_create(list_of_strings, input_string)
+print('List: %s \nInput String: %s \nResult: %s\n' %(list_of_strings, input_string, result))
