@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import * as ReactModal from 'react-modal';
-import { faTimes, faSave, faTrash, faCheck, faBan } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faCheck, faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { isVaild, getFormattedDate } from '../Validator/Validator';
+import { isVaild } from '../Validator/Validator';
 
 export class Button extends Component {
     render() {
@@ -15,17 +14,6 @@ export class Button extends Component {
             <button id={this.props.id} className={cName} onClick={this.props.type === "submit" ? null : this.props.onClick} tabIndex={this.props.tabIndex}>{this.props.children ? this.props.children : this.props.title}</button>
         )
     }
-}
-
-export class Hr extends Component {
-    render() {
-        return (
-            <>
-                <hr className={"d-common-hr " + this.props.cName} width={this.props.width} />
-            </>
-        );
-    };
-
 }
 
 export class Input extends Component {
@@ -47,47 +35,9 @@ export class Input extends Component {
     onChange(e) {
         let re, errMsg, sync = false;
         switch (this.props.iType) {
-            case 'num':
-                re = /^[0-9\b]+$/;
-                break;
             case 'email':
                 re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 errMsg = 'Please enter valid email id';
-                sync = true;
-                break;
-            case 'mobilenum':
-                re = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
-                errMsg = 'Please enter 10 digit number';
-                sync = true;
-                break;
-            case 'Otp':
-                re = /^\d{4}[1-9]*$/;
-                errMsg = 'Please enter valid otp';
-                sync = true;
-                break;
-            case 'pincode':
-                re = /^[1-9][0-9]{5}$/;
-                errMsg = 'Please enter 6 digit pincode';
-                sync = true;
-                break;
-            case 'int':
-                re = /^\d*[1-9]\d*$/;
-                errMsg = 'Please enter a number'
-                sync = true;
-                break;
-            case 'only1num':
-                re = /^([1-9]|1[0])$/;
-                errMsg = 'Please enter only one digit';
-                sync = true;
-                break;
-            case 'textfiled':
-                re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-                errMsg = 'Please enter your name in charater';
-                sync = true;
-                break;
-            case 'notspace':
-                re = /^(\w+\S+)$/;
-                errMsg = 'Please enter valid input';
                 sync = true;
                 break;
             default:
@@ -147,62 +97,6 @@ export class Textarea extends Component {
                     <Label cName="d-common-label-error" title={this.props.label + " is required"} />
                 )}
             </>
-        )
-    }
-}
-
-export class Select extends Component {
-    hasRequiredError() {
-        return this.props.showError && this.props.required && !this.props.value
-    }
-
-    getClass() {
-        let cName = this.props.cName ? "d-common-select " + this.props.cName : "d-common-select"
-        cName = this.hasRequiredError() ? cName + " d-common-input-error" : cName;
-        cName = this.props.readonly ? cName + " readonly" : cName;
-        return cName;
-    }
-    render() {
-        return (
-            <>
-                {this.props.label && !this.props.noLabel && (
-                    <Label title={this.props.label + (this.props.required ? "*" : "")} cName="d-common-input-label" />
-                )}
-                <select id={this.props.id} className={this.getClass()} placeholder={this.props.placeholder} value={this.props.value} onChange={(e) => this.props.onChange(e)} onFocus={(e) => this.props.onFocus ? this.props.onFocus(e, true) : null} onBlur={(e) => this.props.onFocus ? this.props.onFocus(e) : null}>
-                    {this.props.options.map((opt, idx) => {
-                        return <option value={opt.value}>{opt.option}</option>
-                    })}
-                </select>
-                {/* <input type={this.props.type} id={this.props.id} className={this.getClass()} placeholder={this.props.placeholder} value={this.props.value} onChange={(e) => this.props.onChange(e)} /> */}
-                {this.hasRequiredError() && !this.props.noLabel && (
-                    <Label cName="d-common-label-error" title={this.props.label + " is required"} />
-                )}
-            </>
-        )
-    }
-}
-
-export const CheckBox = props => {
-    return (
-        <li className={props.cName ? "d-common-checkbox " + props.cName : "d-common-checkbox"}>
-            <input key={props.id} onClick={props.handleCheckChieldElement} type="checkbox" checked={props.isChecked} value={props.value} />
-            <Label title={props.value} />
-        </li>
-    )
-}
-
-export class Checkbox extends Component {
-    render() {
-        return (
-            <input type="checkbox" name={this.props.name} id={this.props.id} className={this.props.cName ? "d-common-checkbox " + this.props.cName : "d-common-checkbox"} onChange={this.props.onChange} checked={this.props.checked} onFocus={(e) => this.props.onFocus ? this.props.onFocus(e, true) : null} onBlur={(e) => this.props.onFocus ? this.props.onFocus(e) : null} />
-        )
-    }
-}
-
-export class Radio extends Component {
-    render() {
-        return (
-            <input type="radio" id={this.props.id} name={this.props.name} className={this.props.cName ? "d-common-checkbox " + this.props.cName : "d-common-checkbox"} onChange={this.props.onChange} />
         )
     }
 }
@@ -515,96 +409,3 @@ export class Table extends Component {
         );
     }
 }
-
-export const ReactDatePicker = props => {
-    const hasRequiredError = () => {
-        return props.showError && props.required && !props.value;
-    }
-
-    const getClass = () => {
-        let cName = props.cName ? "d-common-date " + props.cName : "d-common-date";
-        cName = hasRequiredError() ? cName + " d-common-input-error" : cName;
-        cName = props.readonly ? cName + " readonly" : cName;
-        return cName;
-    }
-
-    return (
-        <DatePicker
-            className={getClass()}
-            selected={getFormattedDate(props.value)}
-            id={props.id}
-            dateFormat="dd/MM/yyyy"
-            onChange={(value, e) => {
-                if (props.onFocus) props.onFocus(e, true);
-                props.onChange(props.id, value, e);
-            }}
-            minDate={getFormattedDate(props.start)}
-        />
-    );
-}
-
-export const Navbar = props => {
-    return (
-        <Div cName="custom-navbar">
-            <Div cName="input-group mb-3 mt-1 ml-2">
-                <Div cName="input-group-prepend custom-input-prepend">
-                    <Div cName="input-group-text">
-                        <Div cName="search_icon" />
-                    </Div>
-                </Div>
-                <input type="text" className="form-control custom-search-input" placeholder="Search" />
-                <Div cName="input-group-append custom-input-append">
-                    <span className="input-group-text">
-                        <span className="">Sort by &nbsp;</span>
-                        <Div cName="custom-arrow custom-down-arrow" style={{ position: "relative", top: "-1px" }} />
-                    </span>
-                </Div>
-            </Div>
-        </Div>
-    );
-}
-
-export const DCLayout = props => {
-    return (
-        <>
-            <div className="row border-bottom">
-                <div className="col-lg-6 col-xl-6">
-                    <Navbar />
-                </div>
-                <div className="col-lg-3 col-xl-3"></div>
-                <div className="col-lg-2 col-xl-2">
-                    <div className="custom-text d-inline-block vertically-center">
-                        1 - 10 of 100 &nbsp;&nbsp;
-                    </div>
-                    <div
-                        className="d-inline-block vertically-center"
-                        style={{ position: "relative", left: "100px" }}
-                    >
-                        <span className={"custom-arrow custom-left-arrow" + (props.pageno <= 1? " disable-btn": "")} id="minus" onClick={props.onClick? (e) => props.onClick(e): null}></span>
-                        <span className={"custom-arrow custom-right-arrow" + (props.isEnd? " disable-btn": "")} id="plus" onClick={props.onClick? (e) => props.onClick(e): null}></span>
-                    </div>
-                </div>
-                {props.showAddButton ?
-                    <div className="col-lg-1 col-xl-1">
-                        {/* <div className="add_button_icon_1" onClick={this.showOverlay}></div> */}
-                        <div className="add_button_icon_1" id="add" onClick={props.onClick ? (e) => props.onClick(e) : null}></div>
-                    </div>
-                    : null
-                }
-            </div>
-            <div className="row">
-                {props.data ? props.data.map((val, idx) => {
-                    return props.getCard(val, idx);
-                }) : (
-                        <>
-                            {props.card}
-                        </>
-                    )}
-            </div>
-            {/* <div className="overlay-content"> */}
-            {/* <AddCounter /> */}
-            {/* </div> */}
-            <div className="overlay-background"></div>
-        </>
-    )
-};

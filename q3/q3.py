@@ -10,7 +10,6 @@ def check_formation(input_string, keywords):
 
 def can_create(list_of_strings, input_string):
     keywords = { i: 1 for i in list_of_strings }
-    print(keywords)
     return check_formation(input_string, keywords)
 
 list_of_strings = ['back', 'end', 'front', 'tree']

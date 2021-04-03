@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import { Link, Input, Button, Label, Span, Div, Checkbox, H1, Modal, Select } from '../Common/Common';
+import { Div, Modal } from '../Common/Common';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { action_types } from '../../actions/constants';
-import { isEmpty, setToken, getToken } from '../Validator/Validator';
+import { isEmpty, setToken } from '../Validator/Validator';
 import * as actions from '../../actions/action';
 
 class Login extends Component {
     state = {
-        email: "nb@gmail.com",
-        password: "12345678!",
-        showError: false,
         showModal: false,
         modalMsg: "",
         showPass: false,
@@ -41,16 +38,16 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        if (this.props.auth && this.props.auth.token) {
-            this.props.history.push(this.state.roles[this.props.auth.data[0].role]);
+        if (!(this.props.auth && this.props.auth.access_token)) {
+            this.props.history.push("/login");
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.auth !== nextProps.auth && nextProps.auth) {
-            if (nextProps.auth.access_token) {
-                setToken(nextProps.auth.access_token)
-                this.props.history.push("/");
+            if (nextProps.auth.status === 200 && nextProps.auth.data) {
+                setToken(nextProps.auth.data.token, this.state.isLocal)
+                this.props.history.push(this.state.roles[nextProps.auth.data.role_name]);
             } else if(nextProps.auth.message) {
                 this.setState({ showModal: true, modalMsg: nextProps.auth.message, isSuccess: false })
             }
@@ -63,21 +60,10 @@ class Login extends Component {
 
     render() {
         return (
-            <Div cName="login">
-                {this.state.showModal && !this.props.loading && (<Modal width="400px" height="200px" closeModal={this.closeModal} title={this.state.modalMsg} isSuccess={this.state.isSuccess} />)}
-                <Div cName="login-wrapper">
-                    <Div cName="login-wrapper-heading d-common-label">Login</Div>
-                    <form onSubmit={(e) => this.onSubmit(e)}>
-                        <Div cName="row form-group">
-                            <Input iType="email" label="Enter Email" id="email" value={this.state.email} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />
-                        </Div>
-                        <Div cName="row form-group">
-                            <Input type="password" label="Enter Password" id="password" value={this.state.password} required={true} onChange={this.onChange} showError={this.state.showError} />
-                        </Div>
-                        <Div cName="row submit-row">
-                            <Button cName="form-control submit-button-md" title="Login" />
-                        </Div>
-                    </form>
+            <Div cName="home">
+                {this.state.showModal && !this.props.loading && (<Modal width="400px" height="200px" closeModal={this.closeModal} title={this.state.modalMsg} isSuccess={!this.state.showError} />)}
+                <Div cName="home-wrapper">
+                    Home
                 </Div>
             </Div>
         )

@@ -9,26 +9,21 @@ import { MENU, removeToken, getToken } from '../Validator/Validator';
 class Header extends Component {
     state = {
         menu: [],
-        active: '/counter_list',
     }
 
     componentDidMount() {
-        if (getToken() && this.props.auth && this.props.auth.data) {
-            const menu = MENU.filter(e => e.when.indexOf(this.props.auth.data.role_name) !== -1);
-            if (menu.length) {
-                this.setState({ menu: menu, active: menu[0].url });
-            }
+        if (getToken() && this.props.auth && this.props.auth.access_token) {
+            this.setState({ menu: MENU });
         } else {
             this.props.updateReducer(action_types.CLEAR_DATA);
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.auth !== nextProps.auth && nextProps.auth && nextProps.auth.data) {
-            const menu = MENU.filter(e => e.when.indexOf(nextProps.auth.data.role_name) !== -1);
-            if (menu.length) {
-                this.setState({ menu: menu, active: menu[0].url });
-            }
+        if (this.props.auth !== nextProps.auth && nextProps.auth && nextProps.auth.access_token) {
+            this.setState({ menu: MENU });
+        } else {
+            if (this.state.menu.length) this.setState({ menu: [] });
         }
     }
 
@@ -39,7 +34,6 @@ class Header extends Component {
     }
 
     onClick = (e) => {
-        debugger
         if (e.target.id === '/login') this.logout();
         else {
             this.setState({ active: e.target.id })

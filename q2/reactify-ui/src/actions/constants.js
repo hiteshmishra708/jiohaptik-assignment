@@ -9,6 +9,6 @@ export const action_types = {
 
 export const urls = {
     SERVER_URL: 'http://localhost:8000/',
-    LOGIN_URL: 'login',
-    REGISTER_URL: 'register',
+    LOGIN_URL: 'auth/login/',
+    REGISTER_URL: 'auth/register/',
 }

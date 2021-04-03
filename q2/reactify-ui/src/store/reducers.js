@@ -22,7 +22,12 @@ const LayoutReducer = (state = initialState, action) => {
         }
         case action_types.LOGIN: {
             return {
-                ...state, auth: action.payload
+                ...state, auth: action.payload.data
+            }
+        }
+        case action_types.REGISTER: {
+            return {
+                ...state, register: action.payload
             }
         }
         case action_types.LOGOUT: {
@@ -36,6 +41,7 @@ const LayoutReducer = (state = initialState, action) => {
             }
         }
         default: {
+            console.log(state, action.type)
             return state;
         }
     }

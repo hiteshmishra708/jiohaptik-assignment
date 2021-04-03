@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import Layout from './components/Layouts/Layout';
 import Login from './components/Login/Login';
+import Home from './components/Home/Home';
 import Register from './components/Login/Register';
 import { Div, Spinner } from './components/Common/Common';
 import { connect } from "react-redux";
@@ -24,10 +25,10 @@ class App extends Component {
         <Div cName="d-common-app">
           <Header />
           <Div cName="content">
-            {getToken() && this.props.auth && this.props.auth.status === 200 ? (
+            {getToken() && this.props.auth && this.props.auth.access_token ? (
               <Switch>
                 <Layout>
-                  {/* <Route path="/" exact component={Home} /> */}
+                  <Route path="/" exact component={Home} />
                   <Redirect from='*' to='/' />
                 </Layout>
                 <Redirect from='*' to='/' />
@@ -35,10 +36,9 @@ class App extends Component {
             ) : (
                 <Switch>
                   <Layout>
-                    {/* <Route path="/" component={Login} /> */}
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    {/* <Redirect from='*' to='/login' /> */}
+                    <Redirect from='*' to='/login' />
                   </Layout>
                 </Switch>
               )}

@@ -3,7 +3,7 @@ import { getToken } from "../components/Validator/Validator";
 export const Api = (url, body, type) => {
   const headers = {
     "Content-Type": "application/json",
-    "access-token": getToken()
+    "Authorization": "Token " + getToken()
   }
 
   let data = fetch(urls.SERVER_URL + url, {

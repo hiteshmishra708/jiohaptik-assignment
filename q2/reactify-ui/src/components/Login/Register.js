@@ -15,7 +15,6 @@ class Login extends Component {
         showError: false,
         showModal: false,
         modalMsg: "",
-        showinnerModal: false,
         options: [
             { option: "Select Role", value: "" }
         ],
@@ -41,12 +40,23 @@ class Login extends Component {
         this.setState({ showError: true })
         if (this.isValid()) {
             this.props.callApi(action_types.REGISTER, {
+                username: this.getUsername(),
                 email: this.state.email,
                 password: this.state.password,
+                password2: this.state.password,
                 first_name: this.state.first_name,
                 last_name: this.state.last_name
             });
             this.setState({ showError: false, modalMsg: "" });
+        }
+    }
+
+    getUsername() {
+        if (this.state.email) {
+            const email = this.state.email;
+            return email.substring(0, email.indexOf("@")) + Math.random().toString(36).substring(3);
+        } else {
+            return "";
         }
     }
 
@@ -61,28 +71,26 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.auth !== nextProps.auth && nextProps.auth) {
-            if (nextProps.auth.status === 99) {
-                if (nextProps.auth.data.length > 1) {
-                    this.setState({ showinnerModal: true })
-                }
-            } else if (nextProps.auth.status === 200 && nextProps.auth.data) {
-                setToken(nextProps.auth.data.token, this.state.isLocal)
-                this.props.history.push(this.state.roles[nextProps.auth.data.role_name]);
-            } else if(nextProps.auth.message) {
-                this.setState({ showModal: true, modalMsg: nextProps.auth.message, isSuccess: false })
+        if (this.props.register !== nextProps.register && nextProps.register) {
+            if (nextProps.register && typeof nextProps.register.email === 'string') {
+                this.setState({ showModal: true, modalMsg: 'Registration Success', isSuccess: true })
+            } else if (nextProps.register) {
+                this.setState({ showModal: true, modalMsg: 'User already exists', isSuccess: false })
             }
         }
     }
 
     closeModal = () => {
-        this.setState({ showModal: false, modalMsg: "", showError: false });
+        if (this.state.isSuccess) {
+            this.props.history.push("/login");
+        }
+        this.setState({ showModal: false, modalMsg: "", showError: false, isSuccess: false });
     }
 
     render() {
         return (
             <Div cName="login">
-                {this.state.showModal && !this.props.loading && (<Modal width="400px" height="200px" closeModal={this.closeModal} title={this.state.modalMsg} isSuccess={!this.state.showError} />)}
+                {this.state.showModal && !this.props.loading && (<Modal width="400px" height="200px" closeModal={this.closeModal} title={this.state.modalMsg} isSuccess={this.state.isSuccess} />)}
                 <Div cName="login-wrapper">
                     <Div cName="login-wrapper-heading d-common-label">Register</Div>
                     <form onSubmit={(e) => this.onSubmit(e)}>
@@ -90,10 +98,10 @@ class Login extends Component {
                             <Input type="text" label="First Name" id="first_name" value={this.state.first_name} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />
                         </Div>
                         <Div cName="row form-group">
-                            <Input type="text" label="Last Name" id="last_name" value={this.state.last_name} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />
+                            <Input type="text" label="Last Name" id="last_name" value={this.state.last_name} required={true} onChange={this.onChange} showError={this.state.showError} />
                         </Div>
                         <Div cName="row form-group">
-                            <Input iType="email" label="Enter Email" id="email" value={this.state.email} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />
+                            <Input iType="email" label="Enter Email" id="email" value={this.state.email} required={true} onChange={this.onChange} showError={this.state.showError} />
                         </Div>
                         <Div cName="row form-group">
                             <Input type="password" label="Enter Password" id="password" value={this.state.password} required={true} onChange={this.onChange} showError={this.state.showError} />
@@ -111,6 +119,7 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         auth: state.store.auth,
+        register: state.store.register,
         loading: state.store.loader,
     };
 };

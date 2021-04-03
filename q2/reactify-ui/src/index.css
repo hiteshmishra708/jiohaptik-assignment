@@ -728,3 +728,13 @@ textarea {
 }
 
 /* Login css end */
+
+/* All css begin */
+
+.menu-links a::after {
+  content: "";
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* All css end */

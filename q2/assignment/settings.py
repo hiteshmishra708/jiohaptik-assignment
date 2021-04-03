@@ -25,8 +25,7 @@ SECRET_KEY = '=!)8oj58gqnw+gc15qe_sx6=&ceobylx*61daeg8q0n0czxk*k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 # Application definition
 
@@ -38,17 +37,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
     'twitter',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'assignment.urls'
@@ -142,3 +148,16 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'q2/static/')
 PROJECT_ROOT = os.path.abspath(os.path.join(__file__, os.path.pardir))
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'q2/media/')
+
+CORS_ALLOWED_ORIGINS = ["*"]
+
+CSRF_TRUSTED_ORIGINS = ["*"]
+
+CORS_ALLOW_CREDENTIALS = True
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
+    'ROTATE_REFRESH_TOKENS': True,
+}
