@@ -40,6 +40,11 @@ const LayoutReducer = (state = initialState, action) => {
                 ...state, people: action.payload.data
             }
         }
+        // case action_types.FOLLOW_UNFOLLOW: {
+        //     return {
+        //         ...state, people: action.payload.data
+        //     }
+        // }
         case action_types.TWEET:
         case action_types.ALL_TWEETS: {
             return {

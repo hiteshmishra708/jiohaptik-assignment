@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { action_types } from '../../actions/constants';
 import * as actions from '../../actions/action';
 import Tweets from './Tweets';
+import { getFollowStatus } from '../Validator/Validator'
 
 class People extends Component {
 
@@ -15,7 +16,12 @@ class People extends Component {
     }
 
     follow = () => {
-        // this.setState({ showModal: false, modalMsg: "", showError: false });
+        const action = !this.props.people.action;
+        this.props.callApi(action_types.FOLLOW_UNFOLLOW, {
+            id: this.props.match.params.id,
+            action: action
+        });
+        this.props.people.action = action;
     }
 
     render() {
@@ -27,7 +33,7 @@ class People extends Component {
                             <Div cName="wrapper-heading d-common-label">{this.props.people.full_name}</Div>
                             <Div cName="row">
                                 <Label>{"Joined on " + this.props.people.created}</Label>
-                                <Button onClick={() => this.follow()}>Follow</Button>
+                                <Button onClick={() => this.follow()}>{getFollowStatus(this.props.people.action)}</Button>
                             </Div>
                         </>
                     )}

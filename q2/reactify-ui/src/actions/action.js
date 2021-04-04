@@ -21,6 +21,9 @@ export const callApi = (action, body, rType = "POST", hasFile = false, fileList 
     case action_types.PEOPLE:
       url = urls.PEOPLE_URL;
       break;
+    case action_types.FOLLOW_UNFOLLOW:
+      url = urls.FOLLOW_UNFOLLOW_URL;
+      break;
     case action_types.TWEET:
       url = urls.TWEET_URL;
       break;

@@ -7,4 +7,5 @@ urlpatterns = [
     path('tweet/', views.tweet, name='tweet'),
     path('get_tweets/', views.get_tweets, name='get_tweets'),
     path('people/', views.people, name='people'),
+    path('follow_unfollow/', views.follow_unfollow, name='follow_unfollow'),
 ]

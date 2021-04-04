@@ -35,3 +35,7 @@ export const MENU = [
     { url: '/peoples', option: 'All Peoples' },
     { url: '/login', option: 'Logout' },
 ];
+
+export const getFollowStatus = (action) => {
+    return action? 'Unfollow': 'Follow'
+}

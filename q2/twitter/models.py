@@ -18,19 +18,36 @@ class People(models.Model):
             'email': self.user.email,
         }
     
-    def get_people_obj(self, tweets=False):
+    def get_people_obj(self, tweets=False, followed_by = None):
         return {
             'id': self.id,
             'full_name': self.get_full_name(),
             'created': self.created,
-            'tweets': self.get_tweets() if tweets else []
+            'tweets': self.get_tweets() if tweets else [],
+            'action': self.check_follow_status(followed_by) if followed_by else None
         }
 
     def get_tweets(self):
-        return [obj.get_obj() for obj in self.tweet_set.all().order_by('-id')]
+        followers = self.get_followers()
+        if len(followers) > 0:
+            followers = followers + [self.id]
+            tweets = Tweet.objects.filter(people__in=followers).order_by('-id')
+            return [obj.get_obj() for obj in tweets]
+        else:    
+            return [obj.get_obj() for obj in self.tweet_set.all().order_by('-id')]
 
     def get_full_name(self):
         return '%s %s' %(self.user.first_name, self.user.last_name)
+
+    def check_follow_status(self, followed_by):
+        try:
+            FollowRecord.objects.get(followed_by=followed_by, people=self)
+            return True
+        except:
+            return False
+    
+    def get_followers(self):
+        return [obj.people.id for obj in FollowRecord.objects.filter(followed_by=self)]
 
 class FollowRecord(models.Model):
     followed_by = models.ForeignKey(People, on_delete=models.CASCADE, related_name='followed_by')

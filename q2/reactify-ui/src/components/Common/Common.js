@@ -4,7 +4,7 @@ import * as ReactModal from 'react-modal';
 import { faTimes, faCheck, faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-datepicker/dist/react-datepicker.css";
-import { isVaild } from '../Validator/Validator';
+import { isVaild, getFollowStatus } from '../Validator/Validator';
 
 export class Button extends Component {
     render() {
@@ -373,7 +373,7 @@ export const TableBody = props => {
                                 </td>
                             );
                         })}
-                        {<td><Button onClick={() => props.follow(row, rowIndex)}>Follow</Button></td>}
+                        {<td><Button onClick={() => props.follow(row)}>{getFollowStatus(row['action'])}</Button></td>}
                     </tr>
 
                 </>

@@ -25,7 +25,7 @@ class Login extends Component {
             this.props.callApi(action_types.TWEET, {
                 tweet: this.state.tweet,
             });
-            this.setState({ showError: false, modalMsg: "" });
+            this.setState({ showError: false, modalMsg: "", tweet: "" });
         }
     }
 

@@ -9,6 +9,7 @@ export const action_types = {
     ALL_TWEETS: 'ALL_TWEETS',
     ALL_PEOPLES: 'ALL_PEOPLES',
     PEOPLE: 'PEOPLE',
+    FOLLOW_UNFOLLOW: 'FOLLOW_UNFOLLOW'
 }
 
 export const urls = {
@@ -19,4 +20,5 @@ export const urls = {
     ALL_TWEETS_URL: 'twitter/get_tweets/',
     ALL_PEOPLES_URL: 'twitter/get_peoples/',
     PEOPLE_URL: 'twitter/people/',
+    FOLLOW_UNFOLLOW_URL: 'twitter/follow_unfollow/'
 }

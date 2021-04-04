@@ -11,8 +11,13 @@ class Peoples extends Component {
         this.props.callApi(action_types.ALL_PEOPLES, undefined, 'GET');
     }
 
-    follow = () => {
-        // this.setState({ showModal: false, modalMsg: "", showError: false });
+    follow = (people) => {
+        const action = !people.action;
+        this.props.callApi(action_types.FOLLOW_UNFOLLOW, {
+            id: people.id,
+            action: action
+        });
+        people.action = action;
     }
 
     render() {
