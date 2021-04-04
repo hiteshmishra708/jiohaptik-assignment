@@ -8,7 +8,7 @@ import * as actions from '../../actions/action';
 
 class Login extends Component {
     state = {
-        email: "nb@gmail.com",
+        email: "hm@gmail.com",
         password: "12345678!",
         showError: false,
         showModal: false,
@@ -62,7 +62,7 @@ class Login extends Component {
             <Div cName="login">
                 {this.state.showModal && !this.props.loading && (<Modal width="400px" height="200px" closeModal={this.closeModal} title={this.state.modalMsg} isSuccess={this.state.isSuccess} />)}
                 <Div cName="login-wrapper">
-                    <Div cName="login-wrapper-heading d-common-label">Login</Div>
+                    <Div cName="wrapper-heading d-common-label">Login</Div>
                     <form onSubmit={(e) => this.onSubmit(e)}>
                         <Div cName="row form-group">
                             <Input iType="email" label="Enter Email" id="email" value={this.state.email} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />

@@ -47,6 +47,7 @@ class Login extends Component {
     render() {
         return (
             <Div cName="home">
+
                 {this.state.showModal && !this.props.loading && (<Modal width="400px" height="200px" closeModal={this.closeModal} title={this.state.modalMsg} isSuccess={!this.state.showError} />)}
 
                 {this.props.auth && this.props.auth.user && (
@@ -59,7 +60,7 @@ class Login extends Component {
                                 <Button cName="form-control submit-button-md" title="Post" />
                             </Div>
                         </form>
-                        <hr />
+                        <Div cName="wrapper-heading d-common-label">Latest Feed</Div>
                         <Tweets tweets={this.props.tweets} />
                     </Div>
                 )}

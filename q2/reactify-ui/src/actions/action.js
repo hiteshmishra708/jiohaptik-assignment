@@ -18,6 +18,9 @@ export const callApi = (action, body, rType = "POST", hasFile = false, fileList 
     case action_types.ALL_TWEETS:
       url = urls.ALL_TWEETS_URL;
       break;
+    case action_types.PEOPLE:
+      url = urls.PEOPLE_URL;
+      break;
     case action_types.TWEET:
       url = urls.TWEET_URL;
       break;

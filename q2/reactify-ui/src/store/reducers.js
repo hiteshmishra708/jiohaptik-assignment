@@ -35,6 +35,11 @@ const LayoutReducer = (state = initialState, action) => {
                 ...state, peoples: action.payload.data
             }
         }
+        case action_types.PEOPLE: {
+            return {
+                ...state, people: action.payload.data
+            }
+        }
         case action_types.TWEET:
         case action_types.ALL_TWEETS: {
             return {
@@ -52,7 +57,6 @@ const LayoutReducer = (state = initialState, action) => {
             }
         }
         default: {
-            console.log(state, action.type)
             return state;
         }
     }

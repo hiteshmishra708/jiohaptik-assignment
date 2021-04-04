@@ -88,7 +88,7 @@ class Login extends Component {
             <Div cName="login">
                 {this.state.showModal && !this.props.loading && (<Modal width="400px" height="200px" closeModal={this.closeModal} title={this.state.modalMsg} isSuccess={this.state.isSuccess} />)}
                 <Div cName="login-wrapper">
-                    <Div cName="login-wrapper-heading d-common-label">Register</Div>
+                    <Div cName="wrapper-heading d-common-label">Register</Div>
                     <form onSubmit={(e) => this.onSubmit(e)}>
                         <Div cName="row form-group">
                             <Input type="text" label="First Name" id="first_name" value={this.state.first_name} required={true} onChange={this.onChange} showError={this.state.showError} autoFocus={true} />

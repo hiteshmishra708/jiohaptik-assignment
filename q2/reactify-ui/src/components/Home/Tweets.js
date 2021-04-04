@@ -23,10 +23,6 @@ class Tweets extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        auth: state.store.auth,
-        tweets: state.store.tweets,
-        loading: state.store.loader,
-    };
+    return {};
 };
 export default connect(mapStateToProps, actions)(withRouter(Tweets));

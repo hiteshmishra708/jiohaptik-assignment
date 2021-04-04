@@ -31,7 +31,7 @@ export const removeToken = () => {
 }
 
 export const MENU = [
-    { url: '/home', option: 'Home' },
+    { url: '/', option: 'Home' },
     { url: '/peoples', option: 'All Peoples' },
     { url: '/login', option: 'Logout' },
 ];

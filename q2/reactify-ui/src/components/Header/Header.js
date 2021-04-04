@@ -20,10 +20,12 @@ class Header extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.auth !== nextProps.auth && nextProps.auth && nextProps.auth.access_token) {
+        if (nextProps.auth && nextProps.auth.access_token) {
             this.setState({ menu: MENU });
         } else {
-            if (this.state.menu.length) this.setState({ menu: [] });
+            if (this.state.menu.length) {
+                this.setState({ menu: [] });
+            }
         }
     }
 
@@ -49,7 +51,7 @@ class Header extends Component {
                 )}
                 <Div cName="row">
                     <Div cName="links menu-links app-title">
-                        {this.state.menu.length === 0 && (
+                        {!(this.props.auth && this.props.auth.access_token) && (
                             isLogin? (
                                 <Link cName="active" to="/register" title="Register" />
                             ): (

@@ -21,3 +21,10 @@ def tweet(request):
 @permission_classes([IsAuthenticated])
 def get_tweets(request):
     return Response(request.user.people.get_tweets()).get_obj()
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def people(request):
+    json_data = json.loads(request.body)
+    people = People.objects.get(id=json_data['id'])
+    return Response(people.get_people_obj(True)).get_obj()

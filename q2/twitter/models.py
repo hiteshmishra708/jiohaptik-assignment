@@ -18,10 +18,12 @@ class People(models.Model):
             'email': self.user.email,
         }
     
-    def get_people_obj(self):
+    def get_people_obj(self, tweets=False):
         return {
             'id': self.id,
-            'full_name': self.get_full_name()
+            'full_name': self.get_full_name(),
+            'created': self.created,
+            'tweets': self.get_tweets() if tweets else []
         }
 
     def get_tweets(self):

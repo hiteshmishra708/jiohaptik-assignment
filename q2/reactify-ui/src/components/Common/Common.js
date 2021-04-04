@@ -368,7 +368,9 @@ export const TableBody = props => {
                     <tr key={rowIndex} className={props.rowHightlight ? 'table-highlight' : ''}>
                         {props.columns.map((column, index) => {
                             return (
-                                <td key={index}>{row[column]}</td>
+                                <td key={index}>
+                                    <Link to={"people/"+row['id']}>{row[column]}</Link>
+                                </td>
                             );
                         })}
                         {<td><Button onClick={() => props.follow(row, rowIndex)}>Follow</Button></td>}

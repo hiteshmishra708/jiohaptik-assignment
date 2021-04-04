@@ -8,6 +8,7 @@ export const action_types = {
     TWEET: 'TWEET',
     ALL_TWEETS: 'ALL_TWEETS',
     ALL_PEOPLES: 'ALL_PEOPLES',
+    PEOPLE: 'PEOPLE',
 }
 
 export const urls = {
@@ -17,4 +18,5 @@ export const urls = {
     TWEET_URL: 'twitter/tweet/',
     ALL_TWEETS_URL: 'twitter/get_tweets/',
     ALL_PEOPLES_URL: 'twitter/get_peoples/',
+    PEOPLE_URL: 'twitter/people/',
 }
