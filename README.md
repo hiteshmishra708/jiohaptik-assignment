@@ -15,6 +15,7 @@ Jio Haptik Assignment
     source venv/bin/activate
     pip install -r requirements.txt
     cd reactify-ui
+    npm i
     npm run-script collect
 ```
 
