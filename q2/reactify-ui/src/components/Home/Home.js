@@ -22,7 +22,7 @@ class Login extends Component {
         e.preventDefault();
         this.setState({ showError: true })
         if (this.isValid()) {
-            this.props.callApi(action_types.TWEET, {
+            this.props.callApi(action_types.TWEETS, {
                 tweet: this.state.tweet,
             });
             this.setState({ showError: false, modalMsg: "", tweet: "" });
@@ -37,7 +37,7 @@ class Login extends Component {
         if (!(this.props.auth && this.props.auth.access_token)) {
             this.props.history.push("/login");
         }
-        this.props.callApi(action_types.ALL_TWEETS, undefined, 'GET');
+        this.props.callApi(action_types.TWEETS, undefined, 'GET');
     }
 
     closeModal = () => {

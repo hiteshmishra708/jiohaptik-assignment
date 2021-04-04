@@ -8,7 +8,7 @@ import * as actions from '../../actions/action';
 class Peoples extends Component {
 
     componentDidMount() {
-        this.props.callApi(action_types.ALL_PEOPLES, undefined, 'GET');
+        this.props.callApi(action_types.PEOPLES, undefined, 'GET');
     }
 
     follow = (people) => {
@@ -25,7 +25,7 @@ class Peoples extends Component {
         return (
             <Div cName="home">
                 <Div cName="home-wrapper">
-                <Table data={this.props.peoples? this.props.peoples: []} columns={['full_name']} displayColumns={{'full_name': 'Name'}} noHeader={true} follow={this.follow} />
+                <Table data={this.props.peoples && this.props.peoples.length? this.props.peoples: []} columns={['full_name']} displayColumns={{'full_name': 'Name'}} noHeader={true} follow={this.follow} />
                 </Div>
             </Div>
         )

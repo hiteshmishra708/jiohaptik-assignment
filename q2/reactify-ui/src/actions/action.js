@@ -1,7 +1,7 @@
 import { action_types, urls } from "./constants";
 import { Api } from './api';
 
-export const callApi = (action, body, rType = "POST", hasFile = false, fileList = [], hType = 1) => async dispatch => {
+export const callApi = (action, body, rType = "POST") => async dispatch => {
   let url, clearData = false, loading = true;
   switch (action) {
     case action_types.LOGIN:
@@ -15,17 +15,17 @@ export const callApi = (action, body, rType = "POST", hasFile = false, fileList 
     case action_types.ALL_PEOPLES:
       url = urls.ALL_PEOPLES_URL;
       break;
-    case action_types.ALL_TWEETS:
-      url = urls.ALL_TWEETS_URL;
-      break;
     case action_types.PEOPLE:
       url = urls.PEOPLE_URL;
       break;
     case action_types.FOLLOW_UNFOLLOW:
       url = urls.FOLLOW_UNFOLLOW_URL;
       break;
-    case action_types.TWEET:
-      url = urls.TWEET_URL;
+    case action_types.TWEETS:
+      url = urls.TWEETS_URL;
+      break;
+    case action_types.PEOPLES:
+      url = urls.PEOPLES_URL;
       break;
     default:
       dispatch({
