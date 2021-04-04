@@ -103,14 +103,6 @@ body {
     .login-footer, .heading {
         display: none !important;
     }
-  
-    .menu-links {
-        display: none;
-    }
-  
-    .mobile-links {
-        display: block !important;
-    }
   }
   
   .mobile-links {
@@ -277,7 +269,7 @@ body {
     z-index: 100000;
     left: 0;
     top: 0;
-    background-color: rgba(63,62,62,.712);
+    /* background-color: rgba(63,62,62,.712); */
   }
   
   .lds-default {
@@ -719,11 +711,12 @@ body {
     margin: auto;
   }
   
-  .login-wrapper .login-wrapper-heading {
+  .wrapper-heading {
     text-align: center;
     font-size: 25px;
     padding: 25px;
     color: #757575;
+    text-transform: capitalize;
   }
   
   /* Login css end */
@@ -754,8 +747,14 @@ body {
   .tweets-container {
     width: 100%;
     height: auto;
-    margin-top: 10px;
     margin-bottom: 10px;
+    position: relative;
+    min-height: 50px;
+  }
+
+  .tweets-details {
+    position: absolute;
+    right: 0;
   }
   
   /* All css end */

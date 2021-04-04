@@ -25,6 +25,7 @@ class Peoples extends Component {
         return (
             <Div cName="home">
                 <Div cName="home-wrapper">
+                <Div cName="wrapper-heading d-common-label">All Peoples</Div>
                 <Table data={this.props.peoples && this.props.peoples.length? this.props.peoples: []} columns={['full_name']} displayColumns={{'full_name': 'Name'}} noHeader={true} follow={this.follow} />
                 </Div>
             </Div>
