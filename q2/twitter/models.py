@@ -11,6 +11,9 @@ class People(models.Model):
         return '%s %s' % (self.user.first_name, self.user.last_name)
 
     def get_obj(self):
+        """
+        Get Custom Object
+        """
         return {
             'id': self.id,
             'first_name': self.user.first_name,
@@ -19,6 +22,9 @@ class People(models.Model):
         }
     
     def get_people_obj(self, tweets=False, followed_by = None):
+        """
+        Get People Object With Tweets and Follow Status
+        """
         return {
             'id': self.id,
             'full_name': self.get_full_name(),
@@ -28,9 +34,15 @@ class People(models.Model):
         }
 
     def get_self_tweets(self):
+        """
+        Get User's Tweets
+        """
         return [obj.get_obj() for obj in self.tweet_set.all().order_by('-id')]
 
     def get_all_tweets(self):
+        """
+        Get All Tweets and Feeds
+        """
         followers = self.get_followers()
         if len(followers) > 0:
             followers = followers + [self.id]
@@ -50,6 +62,9 @@ class People(models.Model):
             return False
     
     def get_followers(self):
+        """
+        Get followers list
+        """
         return [obj.people.id for obj in FollowRecord.objects.filter(followed_by=self)]
 
 class FollowRecord(models.Model):
@@ -64,7 +79,6 @@ class FollowRecord(models.Model):
 class Tweet(models.Model):
     people = models.ForeignKey(People, on_delete=models.CASCADE)
     tweet = models.CharField(max_length=140)
-    likes = models.IntegerField(default=0)
     created = models.DateField(auto_now_add=True)
     modified = models.DateField(auto_now=True)
 
@@ -72,6 +86,9 @@ class Tweet(models.Model):
         return self.message
 
     def get_obj(self):
+        """
+        Get Tweet's Custom Object
+        """
         return {
             'tweet': self.tweet,
             'full_name': self.people.get_full_name(),
@@ -79,6 +96,9 @@ class Tweet(models.Model):
         }
 
 class Response():
+    """
+    Handle API Responses
+    """
     def __init__(self, data, status_code=200, message=None):
         self.data = data
         self.status_code = status_code

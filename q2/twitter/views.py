@@ -1,7 +1,6 @@
-from django.shortcuts import render
 from .models import People, Response, Tweet, FollowRecord
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 import json
@@ -38,6 +37,9 @@ class Tweets(APIView):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def follow_unfollow(request):
+    """
+    Handle follow unfollow. action = True => follow user
+    """
     json_data = json.loads(request.body)
     people = People.objects.get(id=json_data['id'])
     if json_data['action'] is True:
