@@ -23,18 +23,21 @@ class People(models.Model):
             'id': self.id,
             'full_name': self.get_full_name(),
             'created': self.created,
-            'tweets': self.get_tweets() if tweets else [],
+            'tweets': self.get_self_tweets() if tweets else [],
             'action': self.check_follow_status(followed_by) if followed_by else None
         }
 
-    def get_tweets(self):
+    def get_self_tweets(self):
+        return [obj.get_obj() for obj in self.tweet_set.all().order_by('-id')]
+
+    def get_all_tweets(self):
         followers = self.get_followers()
         if len(followers) > 0:
             followers = followers + [self.id]
             tweets = Tweet.objects.filter(people__in=followers).order_by('-id')
             return [obj.get_obj() for obj in tweets]
         else:    
-            return [obj.get_obj() for obj in self.tweet_set.all().order_by('-id')]
+            return self.get_self_tweets()
 
     def get_full_name(self):
         return '%s %s' %(self.user.first_name, self.user.last_name)

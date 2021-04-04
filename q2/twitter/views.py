@@ -15,12 +15,12 @@ def get_peoples(request):
 def tweet(request):
     json_data = json.loads(request.body)
     tweet = Tweet.objects.create(people=request.user.people, tweet=json_data['tweet'])
-    return Response(request.user.people.get_tweets()).get_obj()
+    return Response(request.user.people.get_all_tweets()).get_obj()
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_tweets(request):
-    return Response(request.user.people.get_tweets()).get_obj()
+    return Response(request.user.people.get_all_tweets()).get_obj()
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
