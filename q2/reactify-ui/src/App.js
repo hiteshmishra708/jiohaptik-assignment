@@ -3,6 +3,7 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import Layout from './components/Layouts/Layout';
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
+import Peoples from './components/Home/Peoples';
 import Register from './components/Login/Register';
 import { Div, Spinner } from './components/Common/Common';
 import { connect } from "react-redux";
@@ -29,6 +30,7 @@ class App extends Component {
               <Switch>
                 <Layout>
                   <Route path="/" exact component={Home} />
+                  <Route path="/peoples"  component={Peoples} />
                   <Redirect from='*' to='/' />
                 </Layout>
                 <Redirect from='*' to='/' />

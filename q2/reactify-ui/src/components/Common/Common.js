@@ -81,7 +81,7 @@ export class Textarea extends Component {
     }
 
     getClass() {
-        let cName = this.props.cName ? "d-common-input " + this.props.cName : "d-common-input";
+        let cName = this.props.cName ? "d-common-input " + this.props.cName : "d-common-input d-textarea";
         cName = this.hasRequiredError() ? cName + " d-common-input-error" : cName;
         cName = this.props.readonly ? cName + " readonly" : cName;
         return cName;
@@ -92,7 +92,7 @@ export class Textarea extends Component {
                 {this.props.label && (
                     <Label title={this.props.label + (this.props.required ? "*" : "")} cName="d-common-input-label" />
                 )}
-                <textarea rows="5" cols="190" type={this.props.type} id={this.props.id} className={this.getClass()} placeholder={this.props.placeholder} value={this.props.value} onChange={(e) => this.props.onChange(e)} tabIndex={this.props.tabIndex} />
+                <textarea rows="5" cols="300" type={this.props.type} id={this.props.id} className={this.getClass()} placeholder={this.props.placeholder} value={this.props.value} onChange={(e) => this.props.onChange(e)} tabIndex={this.props.tabIndex} />
                 {this.hasRequiredError() && (
                     <Label cName="d-common-label-error" title={this.props.label + " is required"} />
                 )}
@@ -354,7 +354,7 @@ const TableHeader = props => {
 }
 
 
-const TableBody = props => {
+export const TableBody = props => {
     if (props.data.length === 0) {
         return (<tbody className="scrollContent">
             <tr>
@@ -367,26 +367,11 @@ const TableBody = props => {
                 <>
                     <tr key={rowIndex} className={props.rowHightlight ? 'table-highlight' : ''}>
                         {props.columns.map((column, index) => {
-                            const rowData = (column === 'userrole') ? (row[column]).name : row[column];
-                            if (column === 'is_active') {
-                                return (
-                                    <td key={index}>{!row["is_active"] ? "In Active" : "Active"}</td>
-                                );
-                            }
-                            else if (column === 'offdays') {
-                                return (
-                                    <td key={index}>{row[column] + " "}</td>
-                                )
-                            } else {
-                                return (
-                                    <td key={index}>{column === 'sno' ? (rowIndex + 1) : rowData}</td>
-                                );
-                            }
+                            return (
+                                <td key={index}>{row[column]}</td>
+                            );
                         })}
-                        {<td><Label cName={"table-label " + (!row["is_active"] ? "label-readonly" : "")} onClick={() => props.editRow(row, rowIndex)}>Edit</Label></td>}
-                        {props.isDelete && <td><Label cName={"table-label " + (!row["is_active"] || (props.nDel && row._id === props.nDel) ? "label-readonly" : "")} onClick={() => props.deleteRow(rowIndex)}>Delete</Label></td>}
-                        {<td><Button cName={!row["is_active"] ? "readonly" : ""} onClick={() => props.editRow(row, rowIndex)}>Edit</Button></td>}
-                        {props.isDelete && <td><Button cName={!row["is_active"] ? "readonly" : ""} onClick={() => props.deleteRow(rowIndex)}>Delete</Button></td>}
+                        {<td><Button onClick={() => props.follow(row, rowIndex)}>Follow</Button></td>}
                     </tr>
 
                 </>
@@ -402,7 +387,7 @@ export class Table extends Component {
         return (
             <Div cName="d-common-table table-responsive">
                 <table class="table">
-                    <TableHeader {...this.props} />
+                    {!this.props.noHeader && (<TableHeader {...this.props} />)}
                     <TableBody {...this.props} />
                 </table>
             </Div>

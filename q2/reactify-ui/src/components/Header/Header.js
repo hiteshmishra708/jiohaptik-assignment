@@ -44,6 +44,9 @@ class Header extends Component {
         const isLogin = window.location.href.indexOf('login') != -1;
         return (
             <Div cName="login-header">
+                {this.props.auth && this.props.auth.user && (
+                    <Div cName="row welcome-msg">Welcome {this.props.auth.user.first_name}</Div>
+                )}
                 <Div cName="row">
                     <Div cName="links menu-links app-title">
                         {this.state.menu.length === 0 && (

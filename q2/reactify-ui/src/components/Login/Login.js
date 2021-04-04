@@ -20,10 +20,6 @@ class Login extends Component {
         this.setState({ [e.target.id]: e.target.value });
     }
 
-    onCheckChange = (e) => {
-        this.setState({ [e.target.id]: e.target.checked })
-    }
-
     onSubmit(e) {
         e.preventDefault();
         this.setState({ showError: true })

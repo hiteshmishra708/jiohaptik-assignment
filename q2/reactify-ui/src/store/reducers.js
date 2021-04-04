@@ -30,6 +30,17 @@ const LayoutReducer = (state = initialState, action) => {
                 ...state, register: action.payload
             }
         }
+        case action_types.ALL_PEOPLES: {
+            return {
+                ...state, peoples: action.payload.data
+            }
+        }
+        case action_types.TWEET:
+        case action_types.ALL_TWEETS: {
+            return {
+                ...state, tweets: action.payload.data
+            }
+        }
         case action_types.LOGOUT: {
             return {
                 ...state, auth: initialState.auth

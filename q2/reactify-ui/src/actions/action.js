@@ -12,6 +12,15 @@ export const callApi = (action, body, rType = "POST", hasFile = false, fileList 
       url = urls.REGISTER_URL;
       clearData = true;
       break;
+    case action_types.ALL_PEOPLES:
+      url = urls.ALL_PEOPLES_URL;
+      break;
+    case action_types.ALL_TWEETS:
+      url = urls.ALL_TWEETS_URL;
+      break;
+    case action_types.TWEET:
+      url = urls.TWEET_URL;
+      break;
     default:
       dispatch({
         type: action_types.UI_REFRESH
@@ -28,11 +37,11 @@ export const callApi = (action, body, rType = "POST", hasFile = false, fileList 
     let response = null;
     response = await Api(url, body, rType);
     console.log("response", response)
-    if (response.status === 403) {
+    if (response.status_code === 403) {
       dispatch({
         type: action_types.LOGOUT
       });
-    } else if (response.status === 200) {
+    } else if (response.status_code === 200) {
       if (clearData) {
         dispatch({
           type: action_types.CLEAR_DATA
