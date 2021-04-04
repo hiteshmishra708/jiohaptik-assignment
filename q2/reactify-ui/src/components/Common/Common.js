@@ -129,35 +129,11 @@ export class UL extends Component {
     render() {
         const listItems = this.props.children.map((child, idx) => {
             return (
-                <li className={this.props.cNameLi} key={idx} onClick={this.props.onClick} >{child}</li>
+                <li className={this.props.cName} key={idx} onClick={this.props.onClick} >{child}</li>
             );
         });
         return (
             <ul className={this.props.cName ? "d-common-ul " + this.props.cName : "d-common-ul"} >{listItems}</ul>
-        )
-    }
-}
-
-export class H1 extends Component {
-    render() {
-        return (
-            <h1 className={this.props.cName ? "d-common-h1 " + this.props.cName : "d-common-h1"}>{this.props.children ? this.props.children : this.props.title}</h1>
-        )
-    }
-}
-
-export class H4 extends Component {
-    render() {
-        return (
-            <h4 className={this.props.cName ? "d-common-h4 " + this.props.cName : "d-common-h4"}>{this.props.children ? this.props.children : this.props.title}</h4>
-        )
-    }
-}
-
-export class P extends Component {
-    render() {
-        return (
-            <p className={this.props.cName ? "d-common-p " + this.props.cName : "d-common-p"}>{this.props.children ? this.props.children : this.props.title}</p>
         )
     }
 }
@@ -173,7 +149,7 @@ export class Div extends Component {
 export class Img extends Component {
     render() {
         return (
-            <img id={this.props.id} className={this.props.cName ? "d-common-img " + this.props.cName : "d-common-img"} src={this.props.isUrl ? this.props.src : require('../../assets/images/' + this.props.src)} alt={this.props.alt} height={this.props.height} width={this.props.width} onClick={this.props.onClick ? (e) => this.props.onClick(e) : null} />
+            <img id={this.props.id} className={this.props.cName ? "d-common-img " + this.props.cName : "d-common-img"} src={this.props.isUrl ? this.props.src : '/static/images/' + this.props.src} alt={this.props.alt} height={this.props.height} width={this.props.width} onClick={this.props.onClick ? (e) => this.props.onClick(e) : null} />
         )
     }
 }
@@ -250,69 +226,6 @@ export class Modal extends Component {
                             </Button>
                         </Div>
                     )}
-                </Div>
-            </ReactModal>
-        )
-    }
-}
-
-export class Popup extends Component {
-    render() {
-        const customStyles = {
-            content: {
-                margin: 'auto',
-                width: this.props.width,
-                height: this.props.height,
-                overflowX: 'auto',
-                overflowY: 'auto',
-                maxHeight: '700px',
-                maxWidth: '900px',
-                borderRadius: '20px',
-                boxShadow: '0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19)',
-            }, overlay: {
-                zIndex: 88
-            }
-        }
-        return (
-            <ReactModal
-                isOpen={true}
-                contentLabel="D2b Popup"
-                onRequestClose={() => this.props.closeModal()}
-                style={customStyles}
-                ariaHideApp={false}
-            >
-                <Div cName="d-common-popup" id="d-common-popup">
-                    <Div cName="header d-common-modal-header">
-                        <Label cName="d-common-modal-title" title={this.props.title} />
-                        <Div onClick={() => this.props.closeModal()}>
-                            <FontAwesomeIcon icon={faTimes} />
-                        </Div>
-                    </Div>
-                    <Div cName="content d-common-modal-content">
-                        {this.props.children}
-                    </Div>
-                    <Div cName="footer d-common-modal-footer text-center">
-                        {this.props.isEdit ? (
-                            <>
-                                <Button cName={(this.props.nDel === this.props.popupId) ? "delete-btn readonly" : "delete-btn"} onClick={() => this.props.deleteRow()}>
-                                    {/* <FontAwesomeIcon icon={faTrash} style={{ marginRight: '5px' }} /> */}
-                                    {/* <Span title="Delete" /> */}
-                                    Delete
-                                </Button>
-                                <Button onClick={() => this.props.submit()}>
-                                    {/* <FontAwesomeIcon icon={faSave} style={{ marginRight: '5px' }} /> */}
-                                    {/* <Span title="Create" /> */}
-                                    Edit
-                                </Button>
-                            </>
-                        ) : (
-                                <Button onClick={() => this.props.submit()}>
-                                    {/* <FontAwesomeIcon icon={faSave} style={{ marginRight: '5px' }} /> */}
-                                    {/* <Span title="Create" /> */}
-                                    {!this.props.isClientEdit ? "Create" : " Edit"}
-                                </Button>
-                            )}
-                    </Div>
                 </Div>
             </ReactModal>
         )

@@ -25,7 +25,7 @@ SECRET_KEY = '=!)8oj58gqnw+gc15qe_sx6=&ceobylx*61daeg8q0n0czxk*k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -159,12 +159,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'q2/static/')
 PROJECT_ROOT = os.path.abspath(os.path.join(__file__, os.path.pardir))
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'q2/media/')
-
-CORS_ALLOWED_ORIGINS = ["*"]
-
-CSRF_TRUSTED_ORIGINS = ["*"]
-
-CORS_ALLOW_CREDENTIALS = True
 
 from datetime import timedelta
 

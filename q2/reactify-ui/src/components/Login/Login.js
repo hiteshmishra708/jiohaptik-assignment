@@ -8,8 +8,8 @@ import * as actions from '../../actions/action';
 
 class Login extends Component {
     state = {
-        email: "hm@gmail.com",
-        password: "12345678!",
+        email: "",
+        password: "",
         showError: false,
         showModal: false,
         modalMsg: "",

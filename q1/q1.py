@@ -13,7 +13,7 @@ def get_active_users():
         except ValueError:
             pass
     chats.close()
-    active_users = sorted(users.iteritems(), key=lambda (k, v): v, reverse=True)[:3]
+    active_users = sorted(users.iteritems(), key=lambda(k, v): v, reverse=True)[:3]
     return [k.replace("<", "").replace(">", "") for (k, v) in active_users]
 
 print(get_active_users())

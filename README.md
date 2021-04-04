@@ -1,6 +1,8 @@
 # jiohaptik-assignment
 Jio Haptik Assignment
 
+## Required Python 3 and Node
+
 ## Question 1: 3 most active users in the conversation
 
 ```
