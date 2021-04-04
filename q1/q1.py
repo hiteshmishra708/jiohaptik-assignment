@@ -1,26 +1,19 @@
 import os
-def readFile(name):
-    "read file and sort users by find active users"
-    array = []
-    allUsers = []
-    with open(os.getcwd() + '/q1/chats.txt', "r") as f:
-        for line in f:
-            array.append(line)
-    for i in array:
-        allUsers.append(i[ i.find("<")+1 : i.find(">")])
+def get_active_users():
+    "return active users from chats.txt"
+    chats = open(os.getcwd() + '/q1/chats.txt', "r")
+    users = {}
+    for chat in chats:
+        try:
+            name = chat[:chat.index(":")].strip()
+            if name not in users:
+                users[name] = 1
+            else:
+                users[name] += 1
+        except ValueError:
+            pass
+    chats.close()
+    active_users = sorted(users.iteritems(), key=lambda (k, v): v, reverse=True)[:3]
+    return [k.replace("<", "").replace(">", "") for (k, v) in active_users]
 
-    users = list(set(allUsers))
-    userDict = {user:allUsers.count(user) for user in users}
-    sortedDict = {}
-    sortedDict = dict(sorted([(value,key) for (key,value) in userDict.items()]))
-    sortedDict = {v: k for k, v in sortedDict.items()}
-    sortedUser = list(sortedDict)
-    print("All users: ", sortedUser)
-
-    i = -1
-    print("Most Active users are: ")
-    while(i >= -3):
-        print("Name: ", sortedUser[i], " Total Messages: ",sortedDict[sortedUser[i]])
-        i -= 1
-
-readFile("./chats.txt")
+print(get_active_users())
